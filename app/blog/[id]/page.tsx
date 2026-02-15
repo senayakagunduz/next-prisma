@@ -4,13 +4,11 @@ import Link from "next/link";
 import React from "react";
 
 interface BlogDetailPage {
-    params: {
-        id: string;
-    }
+    params: Promise<{ id: string }>;
 }
 
-const BlogDetailPage = ({ params }: BlogDetailPage) => {
-    const { id } = params;
+const BlogDetailPage = async ({ params }: BlogDetailPage) => {
+    const { id } = await params;
     const blog = Blogs.find((blog) => blog.id === id);
 
     return (

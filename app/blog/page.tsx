@@ -4,12 +4,7 @@ import BlogTip2 from "@/components/blog/tip2";
 import { Blogs, BlogsType } from "@/constants";
 import { useEffect, useState } from "react";
 
-interface BlogPage {
-    params: {
-        id: string
-    }
-}
-export const BlogPage = ({ params }: BlogPage) => {
+export default function BlogPage() {
     const [blogs, setBlogs] = useState<BlogsType[]>([]);
 
     useEffect(() => {
@@ -34,5 +29,4 @@ export const BlogPage = ({ params }: BlogPage) => {
             </div>
         </>
     );
-};
-export default BlogPage;
+}

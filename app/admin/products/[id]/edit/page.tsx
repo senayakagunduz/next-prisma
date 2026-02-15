@@ -12,8 +12,8 @@ import { fetchAdminProductDetails, updateProductImageAction } from "@/utils/acti
 import React from "react";
 
 
-async function EditProductPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const product = await fetchAdminProductDetails(id);
   const { name, company, description, featured, price } = product;
   return (

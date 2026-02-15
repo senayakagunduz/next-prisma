@@ -28,18 +28,18 @@ export default function RootLayout({
 }>) {
   return (
     // clerkProvider github ve google ile kullanıcı girişi yapmayı sağlıyor, onunla tüm uygulamayı sarmalladım
-    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           suppressHydrationWarning
-        >
+        ><ClerkProvider>
           <Navbar />
           <Container className="py-20">
             {children}
           </Container>
+          </ClerkProvider>
         </body>
       </html>
-    </ClerkProvider>
+    
   );
 }
