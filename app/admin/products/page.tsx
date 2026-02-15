@@ -15,6 +15,8 @@ import FormContainer from "@/components/form/FormContainer";
 import { IconButton } from "@/components/form/IconButton";
 
 
+export const dynamic = 'force-dynamic';
+
 async function AdminProductsPage() {
   const items = await fetchAdminProducts();
   if (items.length === 0) return <EmptyList />;
