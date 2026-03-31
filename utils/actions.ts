@@ -30,14 +30,27 @@ const renderError = (error: unknown): { message: string } => {
 };
 
 
+//export const fetchFeaturedProducts = async () => {
+  //const products = await db.product.findMany({
+    //where: {
+      //featured: true,
+    //},
+  //})
+  //return products
+//}
+
 export const fetchFeaturedProducts = async () => {
-  const products = await db.product.findMany({
-    where: {
-      featured: true,
-    },
-  })
-  return products
-}
+  try {
+    const products = await db.product.findMany({
+      where: { featured: true },
+    });
+    return products;
+  } catch (error) {
+    console.error('Database error:', error);
+    // Mock data döndür
+    return [];
+  }
+};
 
 export const fetchAllProducts = async ({ search = '' }: { search: string }) => {
   return db.product.findMany({

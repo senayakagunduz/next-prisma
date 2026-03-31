@@ -1,4 +1,4 @@
-// middleware.ts - Son kontrol
+// middleware.ts
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 const isPublicRoute = createRouteMatcher([
@@ -25,9 +25,15 @@ export default clerkMiddleware(async (auth, req) => {
       return Response.redirect(signInUrl);
     }
 
-    // ⭐ EN ÖNEMLİ KISIM: Admin kontrolü
-    if (userId !== process.env.ADMIN_USER_ID) {
-      console.log('❌ Not admin:', userId, 'vs', process.env.ADMIN_USER_ID);
+    // 🔧 Güvenli kontrol
+    const adminUserId = process.env.ADMIN_USER_ID;
+    if (!adminUserId) {
+      console.error('❌ ADMIN_USER_ID environment variable is not set');
+      return Response.redirect(new URL('/error', req.url));
+    }
+
+    if (userId !== adminUserId) {
+      console.log('❌ Not admin:', userId, 'vs', adminUserId);
       return Response.redirect(new URL('/', req.url));
     }
   }
